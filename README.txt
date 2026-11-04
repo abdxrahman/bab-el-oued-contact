@@ -38,42 +38,14 @@ The link changes each time you start it. Your PC has to stay on while you play.
 
 
 3. ONLINE, always on: put the server on a free host
-----------------------------------------------------
-GitHub stores the code; it does not run the game server. Use GitHub together
-with Render (or another Node.js host) like this:
-
-  1. Create a new GitHub repository. Do not add a README, .gitignore, or
-     license if GitHub asks, because this folder already contains the project.
-  2. In this folder, open PowerShell and run:
-
-       git init
-       git add .
-       git commit -m "Initial game server"
-       git branch -M main
-       git remote add origin https://github.com/YOUR-NAME/YOUR-REPOSITORY.git
-       git push -u origin main
-
-     Replace YOUR-NAME/YOUR-REPOSITORY with your GitHub repository address.
-  3. Create a free account at https://render.com, choose New > Blueprint,
-     and select the GitHub repository. Render reads render.yaml and creates
-     the server automatically.
-  4. Open the HTTPS address Render gives you:
-     https://<name>.onrender.com
-     Press ONLINE, create a lobby, and send the invite link to your friends.
-
-  The Render free plan sleeps after 15 minutes with nobody playing and takes
-  about half a minute to wake up on the next visit. Render supports the
-  game's WebSocket connections, so friends do not need to be on the same
-  Wi-Fi.
-
-  To update the online game later:
-       git add .
-       git commit -m "Update game"
-       git push
-  Render redeploys after the push.
-
-  Important: a public GitHub repository lets other people see the source and
-  game assets. Never put passwords, API keys, or other secrets in this folder.
+---------------------------------------------------
+Render (render.com, free plan):
+  1. Put this whole folder in a GitHub repository.
+  2. On Render choose New, Blueprint, pick the repository. render.yaml sets
+     everything up.
+  3. Your game lives at https://<name>.onrender.com and anyone can join.
+  On the free plan the server sleeps after 15 minutes with nobody playing and
+  takes about half a minute to wake up on the next visit.
 
 Any other host that runs Node.js or Docker works too (Railway, Fly.io, a VPS).
 It listens on the PORT the host gives it. If links come out wrong, set
@@ -98,3 +70,30 @@ Whoever creates the lobby is the host and picks the time limit and kills to win
 in the lobby screen. When the time runs out or someone reaches the kill target,
 the match ends, the scoreboard shows the winner, and a new round starts after
 12 seconds. Press Enter (or Y) in a match to chat with everyone.
+
+TEAM DEATHMATCH
+The host can pick Team deathmatch in the lobby. Players are split into Blue and
+Red automatically and kept even. There is no timer: the first team to reach the
+kill limit wins. Friendly fire is off, teammates have blue name tags, and the
+scoreboard (Tab) shows both teams.
+
+VOICE CHAT
+Pick Push to talk (hold T) or Open mic in the lobby or the pause menu, and who
+hears you: everyone near you (quieter with distance, from where you stand) or
+your team over the radio (team deathmatch).
+Browsers only allow the microphone on https pages:
+- Online through the tunnel or a cloud host: already https, nothing to do.
+- On a LAN: use the "With voice chat" https address the server window shows.
+  The browser warns that the certificate is not trusted, because the server made
+  it itself. Click Advanced, then Proceed (Chrome) or Accept the risk (Firefox).
+  You only do this once per computer.
+The torch key in night mode moved from T to B.
+
+FPS AND PING
+The top left corner shows frames per second and your ping to the server.
+
+LEAN AND GRENADES
+Q and E lean left and right round corners. G throws your grenade; hold G to open
+the wheel and pick Frag, Smoke, Molotov or Flashbang (move the mouse toward one,
+or press 1 to 4), then let go. Molotovs set the ground on fire for a few seconds.
+Flashbangs blind and deafen anyone who sees them go off, you included.
